@@ -1,5 +1,5 @@
 {
-  "name": "finn-elec-api",
+  "name": "volt-safe-api",
   "version": "1.0.0",
   "type": "module",
   "main": "server.js",
