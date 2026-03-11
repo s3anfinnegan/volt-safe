@@ -20,5 +20,4 @@ A high-performance, responsive web application for **VoltSafe Ltd**, an electric
 
 ### Web Hosting
 - **Platform:** [Vercel](https://vercel.com)
-- **CI/CD:** Automatic deployments triggered on every `git push` to the `main` branch.
-- **Configuration:** Root directory set to `/client`.
+- **CI/CD:** Automatic deployments triggered on every `git push` to the `main` branch
