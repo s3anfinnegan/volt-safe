@@ -1,16 +1,24 @@
-# Frontend 
-- Built to be responsive using React Vite
-- Hosted on GitHub Pages
-- User fills out the QuoteForm to request a free quote from Volt Safe for a job
-- POST request is sent to /send-quote
+# VoltSafe Ltd - Official Website
 
-# Backend
-- Simple Node server using Express for handling the QuoteForm requests
-- Hosted on Render (Web Services)
-- Receives the POST request and uses SendGrid to email info@voltsafe.ie with new request for quotation
+A high-performance, responsive web application for **VoltSafe Ltd**, an electrical services provider based in Galway, Ireland. This project has been optimised for speed, professional branding, and zero-maintenance reliability.
 
-# Hosting
-- Bought the custom domain name (www.voltsafe.ie) on Hosting Ireland, along with the email service
-- Set up the DNS within Hosting Ireland to map the GH Pages URL to voltsafe.ie (CNAME and A Records)
+## Tech Stack
 
+### Frontend
+- **Framework:** React (built with **Vite** for lightning-fast bundling).
+- **Styling:** **Tailwind CSS**
+- **Icons:** Lucide-React / Heroicons.
 
+### "Serverless" Form Logic
+- **Provider:** [Web3Forms](https://web3forms.com/)
+- **Workflow:** To minimise server maintenance, the Node.js backend has been replaced with a direct-to-email integration.
+- **Functionality:** The `QuoteForm` validates user data locally before sending a secure POST request to Web3Forms, which instantly delivers lead details to the business inbox.
+
+---
+
+## Hosting & Deployment
+
+### Web Hosting
+- **Platform:** [Vercel](https://vercel.com)
+- **CI/CD:** Automatic deployments triggered on every `git push` to the `main` branch.
+- **Configuration:** Root directory set to `/client`.
