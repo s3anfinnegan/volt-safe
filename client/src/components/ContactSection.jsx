@@ -24,7 +24,7 @@ const ContactSection = ({ openQuote }) => {
                 <Phone className="w-6 h-6 text-emerald-600" />
               </div>
               <div>
-                <div className="font-semibold text-gray-900">Call Us</div>
+                <div className="font-semibold text-gray-900">Call John</div>
                 <div className="text-gray-600">087 288 8202</div>
               </div>
             </div>
