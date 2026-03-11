@@ -9,7 +9,7 @@ const ChooseVoltsSafe = () => {
           {/* Left Column: Why Choose VoltSafe */}
           <div>
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
-              Why Choose VoltSafe?
+              Why Choose VoltSafe Ltd?
             </h2>
 
             <div className="space-y-6">
@@ -37,7 +37,7 @@ const ChooseVoltsSafe = () => {
                     Safe Electric Approved
                   </h3>
                   <p className="text-gray-600">
-                    VoltSafe is a Registered Electrical Contractor with Safe Electric, qualifying customers for SEAI grants and ensuring the highest standards of safety and quality.
+                    VoltSafe Ltd is a Registered Electrical Contractor with Safe Electric, qualifying customers for SEAI grants and ensuring the highest standards of safety and quality.
                   </p>
                 </div>
               </div>
@@ -51,7 +51,7 @@ const ChooseVoltsSafe = () => {
                     Decades of Experience
                   </h3>
                   <p className="text-gray-600">
-                    VoltSafe has been providing expert, reliable electrical services for over 30 years, with a proven track record of successful projects across Ireland and Europe. 
+                    VoltSafe Ltd has been providing expert, reliable electrical services for over 30 years, with a proven track record of successful projects across Ireland and Europe. 
                   </p>
                 </div>
               </div>
@@ -70,14 +70,14 @@ const ChooseVoltsSafe = () => {
             <h2 className="text-2xl font-bold text-gray-900 mb-4"> What Our Customers Say </h2>
 
             <p className="text-gray-700 mb-4">
-              “VoltSafe recently installed a scoreboard on our hockey pitch, and we were extremely pleased with the work. John and his team carried out the installation to a very high standard, completing the job efficiently, professionally, and on schedule.
+              “VoltSafe recently installed a scoreboard on our hockey pitch, and we were extremely pleased with the work. John and his team carried out the installation to a very high standard, completing the job efficiently, professionally, and on schedule.”
             </p>
             <p className="text-gray-700 mb-4">
               We would have no hesitation in recommending VoltSafe and would be very happy to work with them again in the future.”
             </p>
 
             <div className="text-sm text-gray-600 font-semibold">
-              – Dr. Alan Kinsella, Dominican College Galway
+              – Dr. Alan Kinsella, Principal at Dominican College Galway
             </div>
           </div>
 

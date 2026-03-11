@@ -25,7 +25,12 @@ const ContactSection = ({ openQuote }) => {
               </div>
               <div>
                 <div className="font-semibold text-gray-900">Call John</div>
-                <div className="text-gray-600">087 288 8202</div>
+                <a
+                  href="tel:+353872888202"
+                  className="text-gray-600 hover:text-emerald-600 transition-colors"
+                >
+                  087 288 8202
+                </a>
               </div>
             </div>
 
@@ -35,7 +40,12 @@ const ContactSection = ({ openQuote }) => {
               </div>
               <div>
                 <div className="font-semibold text-gray-900">Email Us</div>
-                <div className="text-gray-600">info@voltsafe.ie</div>
+                <a
+                  href="mailto:info@voltsafe.ie"
+                  className="text-gray-600 hover:text-emerald-600 transition-colors"
+                >
+                  info@voltsafe.ie
+                </a>
               </div>
             </div>
 

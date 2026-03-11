@@ -33,10 +33,13 @@ const Header = ({ openQuote }) => {
 
           {/* Contact Info & CTA */}
           <div className="hidden md:flex items-center space-x-4">
-            <div className="flex items-center text-sm text-gray-600">
-              <Phone size={16} className="mr-1" />
-              <span>+353 87 288 8202</span>
-            </div>
+            <a
+              href="tel:+353872888202"
+              className="flex items-center text-sm font-medium text-gray-700 hover:text-emerald-600 transition-colors"
+            >
+              <Phone size={16} className="mr-2" />
+              087 288 8202
+            </a>
 
             <button
               onClick={openQuote}

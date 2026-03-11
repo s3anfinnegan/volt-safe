@@ -28,7 +28,7 @@ const Hero = ({ openQuote }) => {
             </h1>
 
             <p className="text-xl text-gray-600 mb-8"> 
-              VoltSafe provides professional electrical contracting services with a focus on safety, reliability, and compliance.
+              VoltSafe Ltd provides professional electrical contracting services with a focus on safety, reliability, and compliance.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-8">

@@ -8,7 +8,7 @@ const Footer = () => {
 
           <div className="md:col-span-2">
             <img
-              src="/voltsafelogo2.svg"
+              src="/footer.svg"
               alt="VoltSafe Electrical Galway"
               className="h-12 w-auto"
             />

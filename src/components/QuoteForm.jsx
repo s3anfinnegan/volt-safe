@@ -1,193 +1,190 @@
-import { useState } from "react";
-import { ArrowRight, X } from "lucide-react";
+import React, { useState } from "react";
 
 const QuoteForm = ({ isModal = false, onClose = null }) => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    service: "",
-    location: "",
-    message: "",
-  });
+  const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [serverMessage, setServerMessage] = useState("");
 
-  // const services = [
-  //   "EV Charger Installation",
-  //   "Fire Alarm Systems",
-  //   "Emergency Lighting",
-  //   "Inspections & Testing",
-  //   "Commercial Electrical Work",
-  //   "Smart Home Setup",
-  //   "Other",
-  // ];
+  const validate = (data) => {
+    let tempErrors = {};
 
-  // Validation regex
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const phoneRegex = /^[0-9+()\-\s]{7,20}$/;
+    if (!data.get("name").trim()) tempErrors.name = "Name is required";
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(data.get("email")))
+      tempErrors.email = "Enter a valid email address";
+
+    const phone = data.get("phone").replace(/\s/g, "");
+    if (phone.length < 7) tempErrors.phone = "Enter a valid phone number";
+
+    if (!data.get("location").trim())
+      tempErrors.location = "Please provide your location";
+
+    if (data.get("message").trim().length < 5)
+      tempErrors.message = "Please provide a bit more detail about the job";
+
+    return tempErrors;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setServerMessage("");
 
-    const { name, email, phone, location, message } = formData;
+    const formData = new FormData(e.target);
+    const validationErrors = validate(formData);
 
-    if (!name || !email || !phone || !location || !message) {
-      alert("⚠️ Please fill in all fields before submitting.");
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
       return;
     }
 
-    if (!emailRegex.test(email)) {
-      alert("⚠️ Please enter a valid email address.");
-      return;
-    }
+    setErrors({});
+    setIsSubmitting(true);
 
-    if (!phoneRegex.test(phone)) {
-      alert("⚠️ Please enter a valid phone number.");
-      return;
-    }
+    formData.append("access_key", "2f9041d4-19ef-46ca-81d4-b8aee42a816b");
+    formData.append(
+      "subject",
+      `New Quote: ${formData.get("name")} - ${formData.get("location")}`
+    );
 
     try {
-      const response = await fetch(
-        "https://voltsafe-api.onrender.com/send-quote",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setServerMessage("Thanks! Your quote request has been sent.");
+        e.target.reset();
+
+        if (onClose) {
+          setTimeout(() => onClose(), 2000);
         }
-      );
-
-      if (response.ok) {
-        alert(
-          "✅ Thank you! We’ll contact you within 24 hours with your free quote."
-        );
-
-        setFormData({
-          name: "",
-          email: "",
-          phone: "",
-          service: "",
-          location: "",
-          message: "",
-        });
-
-        if (onClose) onClose();
       } else {
-        alert("⚠️ Something went wrong. Please try again later.");
+        setServerMessage("Something went wrong. Please try again.");
       }
-    } catch (error) {
-      alert(
-        "⚠️ Unable to send your message. Please check your internet connection."
-      );
-      console.error(error);
+    } catch {
+      setServerMessage("Network error. Please check your connection.");
+    } finally {
+      setIsSubmitting(false);
     }
-  };
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const formClass = isModal
-    ? "bg-white p-6 rounded-lg shadow-xl max-w-lg w-full mx-4"
-    : "bg-white p-6 sm:p-8 rounded-xl shadow-lg w-full max-w-xl mx-auto";
+    ? "bg-white p-6 rounded-xl shadow-xl max-w-lg w-full mx-4"
+    : "bg-white p-6 rounded-xl shadow-lg max-w-lg mx-auto";
 
   return (
     <div className={formClass}>
       {isModal && (
         <div className="flex justify-between items-center mb-4">
           <h3 className="text-xl font-bold text-gray-900">
-            Get Your Free Quote
+            Request a Free Quote
           </h3>
 
           <button
             onClick={onClose}
-            className="text-gray-500 hover:text-gray-700"
+            className="text-gray-500 hover:text-gray-700 text-xl"
           >
-            <X size={24} />
+            ✕
           </button>
         </div>
       )}
 
       <form onSubmit={handleSubmit} className="space-y-4">
-        {/* Name + Email */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <input
-            type="text"
-            name="name"
-            placeholder="Your Name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-          />
-
-          <input
-            type="email"
-            name="email"
-            placeholder="Email Address"
-            value={formData.email}
-            onChange={handleChange}
-            required
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-          />
-        </div>
-
-        {/* Phone + Location */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <input
-            type="tel"
-            name="phone"
-            placeholder="Phone Number"
-            value={formData.phone}
-            onChange={handleChange}
-            required
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-          />
-
-          <input
-            type="text"
-            name="location"
-            placeholder="Your Location, e.g. Tuam"
-            value={formData.location}
-            onChange={handleChange}
-            required
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-          />
-        </div>
-
-        {/* Optional Service Dropdown */}
-        {/*
-        <select
-          name="service"
-          value={formData.service}
-          onChange={handleChange}
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-        >
-          <option value="">Select Service Needed</option>
-
-          {services.map((service) => (
-            <option key={service} value={service}>
-              {service}
-            </option>
-          ))}
-        </select>
-        */}
-
-        {/* Message */}
-        <textarea
-          name="message"
-          placeholder="Tell us about the work you need done"
-          value={formData.message}
-          onChange={handleChange}
-          rows="3"
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+        {/* Honeypot */}
+        <input
+          type="checkbox"
+          name="botcheck"
+          className="hidden"
+          style={{ display: "none" }}
         />
 
-        {/* Submit */}
+        <div>
+          <input
+            name="name"
+            type="text"
+            placeholder="Full Name"
+            className={`w-full p-3 border rounded ${
+              errors.name ? "border-red-500" : "border-slate-300"
+            }`}
+          />
+          {errors.name && (
+            <p className="text-red-500 text-xs mt-1">{errors.name}</p>
+          )}
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <input
+              name="email"
+              type="email"
+              placeholder="Email Address"
+              className={`w-full p-3 border rounded ${
+                errors.email ? "border-red-500" : "border-slate-300"
+              }`}
+            />
+            {errors.email && (
+              <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+            )}
+          </div>
+
+          <div>
+            <input
+              name="phone"
+              type="text"
+              placeholder="Phone Number"
+              className={`w-full p-3 border rounded ${
+                errors.phone ? "border-red-500" : "border-slate-300"
+              }`}
+            />
+            {errors.phone && (
+              <p className="text-red-500 text-xs mt-1">{errors.phone}</p>
+            )}
+          </div>
+        </div>
+
+        <div>
+          <input
+            name="location"
+            type="text"
+            placeholder="Eircode or Town (e.g. Galway City)"
+            className={`w-full p-3 border rounded ${
+              errors.location ? "border-red-500" : "border-slate-300"
+            }`}
+          />
+          {errors.location && (
+            <p className="text-red-500 text-xs mt-1">{errors.location}</p>
+          )}
+        </div>
+
+        <div>
+          <textarea
+            name="message"
+            placeholder="What do you need help with?"
+            rows="4"
+            className={`w-full p-3 border rounded ${
+              errors.message ? "border-red-500" : "border-slate-300"
+            }`}
+          ></textarea>
+          {errors.message && (
+            <p className="text-red-500 text-xs mt-1">{errors.message}</p>
+          )}
+        </div>
+
         <button
           type="submit"
-          className="w-full bg-emerald-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-emerald-700 transition-colors flex items-center justify-center gap-2"
+          disabled={isSubmitting}
+          className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 rounded transition-colors disabled:opacity-50"
         >
-          Contact Us Today <ArrowRight size={20} />
+          {isSubmitting ? "Sending..." : "Request Free Quote"}
         </button>
+
+        {serverMessage && (
+          <p className="text-center text-sm text-slate-700">{serverMessage}</p>
+        )}
       </form>
     </div>
   );
