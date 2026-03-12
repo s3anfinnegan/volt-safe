@@ -37,6 +37,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/terms" element={<Terms />} />
+        {/* 404 Page must always be at the bottom */}
         <Route path="*" element={<NotFound />} />
       </Routes>
 
