@@ -13,6 +13,7 @@ import CookieBanner from "./components/CookieBanner";
 
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Terms from "./pages/Terms";
+import NotFound from "./pages/NotFound";
 
 function App() {
   const [showQuoteModal, setShowQuoteModal] = useState(false);
@@ -36,6 +37,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/terms" element={<Terms />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
 
       <Footer />
