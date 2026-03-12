@@ -68,7 +68,7 @@ const Footer = () => {
           <p>
             Website 🛠️ by{" "}
             <a
-              href="https://www.linkedin.com/in/sean-finnegan-/"
+              href="https://www.seanfinnegan.xyz/route52"
               target="_blank"
               rel="noopener noreferrer"
               className="underline hover:text-emerald-600"
