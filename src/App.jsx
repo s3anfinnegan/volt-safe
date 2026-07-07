@@ -21,7 +21,7 @@ function App() {
   const Home = () => (
     <>
       <Hero openQuote={() => setShowQuoteModal(true)} />
-      <Services />
+      <Services openQuote={() => setShowQuoteModal(true)} />
       <GrantSection openQuote={() => setShowQuoteModal(true)} />
       <WhyChooseVoltsSafe />
       <ContactSection />
