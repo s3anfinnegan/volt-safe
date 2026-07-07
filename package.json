@@ -1,8 +1,8 @@
 {
   "homepage": "https://s3anfinnegan.github.io/finn-elec",
-  "name": "finnegan-electrical",
+  "name": "voltsafe",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",

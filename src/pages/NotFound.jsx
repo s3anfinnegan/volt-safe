@@ -9,7 +9,7 @@ const NotFound = () => {
         <div className="text-[#059669] text-6xl font-bold mb-4">404</div>
         
         <h1 className="text-3xl font-bold text-[#1e293b] mb-4">
-          I think you've got your wires crossed.
+          Looks like you've got your wires crossed.
         </h1>
         
         <p className="text-slate-600 mb-8 text-lg">
